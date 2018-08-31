@@ -1,3 +1,3 @@
 # DeutschWortTrainer
 
-[![örnek](https://i.hizliresim.com/7DLqom.png)](https://hizliresim.com/7DLqom)
+![ornek](https://i.hizliresim.com/7DLqom.png)](https://hizliresim.com/7DLqom)
