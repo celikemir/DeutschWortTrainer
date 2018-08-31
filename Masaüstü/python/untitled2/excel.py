@@ -105,7 +105,7 @@ class App(QWidget):
         return self.label1.setText(DataF['Wort'][self.i])
 
      else:
-         print("yanlýŷ")
+         print("yanlış")
 
     def on_click3(self):
 
