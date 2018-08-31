@@ -13,27 +13,22 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from PyQt5 import QtCore
+import time
 
 DataF=pd.read_excel("/home/emir/Masaüstü/artikel.xlsx")
 
 print("Column headings:")
 print(DataF.columns)
 
-for i in DataF.index:
-    print(DataF['artikel'][i])
+for q in DataF.index:
+    print(DataF['artikel'][q])
 
-for i in DataF.index:
-    print(DataF['Wort'][i])
+for q in DataF.index:
+    print(DataF['Wort'][q])
 
-for i in DataF.index:
-    print(DataF['Plural'][i])
-
-
-#if((DataF['artikel'][1])=='das'):
-#    print("evet bildiniz")
-#else:
-#    print("bilemedin dogru cevap")
-
+for q in DataF.index:
+    print(DataF['Plural'][q])
 
 class App(QWidget):
 
@@ -44,6 +39,7 @@ class App(QWidget):
         self.top = 100
         self.width = 320
         self.height = 200
+        self.i=0
 
 
         self.initUI()
@@ -68,6 +64,12 @@ class App(QWidget):
         button3.move(200, 160)
         button3.clicked.connect(self.on_click3)
 
+        button4 = QPushButton('Kein', self)
+        button4.setToolTip('Kontrol Et')
+        button4.move(110,135)
+        button4.clicked.connect(self.on_click4)
+
+
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
 
@@ -75,36 +77,62 @@ class App(QWidget):
 
 
 
-        self.label1 = QLabel(DataF['Wort'][1], self)
-        self.label1.move(130,80)
+        self.label1=QLabel(DataF['Wort'][self.i], self)
 
+        newfont = QtGui.QFont("Times", 15, QtGui.QFont.Bold)
+        self.label1.setFont(newfont)
+        self.label1.setGeometry(QtCore.QRect(110, 30, 200, 100))  # (x, y, width, height)
 
         self.show()
+
 
     @pyqtSlot()
     def on_click(self):
 
-     if(DataF['artikel'][1]=="der"):
+     if(DataF['artikel'][self.i]=="der"):
         #print(DataF['Plural'][1])
-        print('dogru')
+        self.i+=1
+        print('dogru {}' .format(self.i))
+        return  self.label1.setText(DataF['Wort'][self.i])
      else:
          print("yanlış")
 
     def on_click2(self):
 
-     if (DataF['artikel'][1] == "die"):
+     if (DataF['artikel'][self.i] == "die"):
+        self.i+=1
+        print('dogru {}' .format(self.i))
+        return self.label1.setText(DataF['Wort'][self.i])
 
-        print('dogru')
      else:
-         print("yanlış")
+         print("yanlýŷ")
 
     def on_click3(self):
 
-     if (DataF['artikel'][1] == "das"):
+     if (DataF['artikel'][self.i] == "das"):
+        self.i+=1
+        print('dogru {}' .format(self.i))
 
-        print('dogru')
+        return self.label1.setText(DataF['Wort'][self.i])
+
+
      else:
          print("yanlış")
+
+    def on_click4(self):
+
+     if (DataF['artikel'][self.i] == "-"):
+        self.i+=1
+        print('dogru {}' .format(self.i))
+
+        return self.label1.setText(DataF['Wort'][self.i])
+
+
+     else:
+         print("yanlış")
+
+
+
 
 
 
